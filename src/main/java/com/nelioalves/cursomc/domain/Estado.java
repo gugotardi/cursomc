@@ -1,6 +1,7 @@
 package com.nelioalves.cursomc.domain;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+
 
 @Entity
 public class Estado implements Serializable {
@@ -20,8 +25,9 @@ public class Estado implements Serializable {
 	private Integer id;
 	private String nome;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy="estado")
-	private List<Cidade> Cidades = new ArrayList<>();
+	private List<Cidade> cidades = new ArrayList<>();
 	
 	public Estado () {
 	}
@@ -49,11 +55,11 @@ public class Estado implements Serializable {
 	}
 
 	public List<Cidade> getCidades() {
-		return Cidades;
+		return cidades;
 	}
 
 	public void setCidades(List<Cidade> cidades) {
-		Cidades = cidades;
+		this.cidades = cidades;
 	}
 
 	@Override
